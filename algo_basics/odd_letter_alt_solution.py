@@ -32,11 +32,16 @@ xkctpx
 '''
 
 def get_odd_letter(initial_text, modified_text):
-    initial_ord_sum = sum(ord(char) for char in initial_text)
-    modified_ord_sum = sum(ord(char) for char in modified_text)
-    odd_letter_ord = modified_ord_sum - initial_ord_sum
+    text_sum_initial = 0
+    text_sum_modified = 0
 
-    return chr(odd_letter_ord)
+    for i in range(len(initial_text)):
+        text_sum_initial += ord(initial_text[i])
+        text_sum_modified += ord(modified_text[i])
+    text_sum_modified += ord(modified_text[-1])
+
+    text_sum_diff = text_sum_modified - text_sum_initial
+    return chr(text_sum_diff)
 
 
 def main():

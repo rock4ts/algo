@@ -37,22 +37,27 @@ https://contest.yandex.ru/contest/23389/problems/K/
 def list_form_sum(len_x, x, k):
     k = [int(d) for d in k]
     len_k = len(k)
-    max_len = max(len_x, len_k)
-    x = [0] * (max_len - len_x) + x
-    k = [0] * (max_len - len_k) + k
-    result = []
+    min_len = min(len_x, len_k)
+    result = x if len_k == min_len else k
+    adder = x if k == result else k
+    result = [0] + result
+    len_diff = len(result) - min_len
     carrier = 0
 
-    for i in range(max_len - 1, - 1, -1):
-        sum_i = x[i] + k[i] + carrier
-        result.append(sum_i % 10)
+    for i in range(min_len - 1, -1, -1):
+        sum_i = result[len_diff + i] + adder[i] + carrier
+        result[len_diff + i] = sum_i % 10
         carrier = 1 if sum_i > 9 else 0
 
     if carrier > 0:
-        result.append(1)
+        for j in range(len_diff - 1, -1, -1):
+            sum_j = result[j] + carrier
+            result[j] = sum_j % 10
+            carrier = 1 if sum_j > 9 else 0
+            if carrier == 0:
+                break
 
-    result.reverse()
-    return result
+    return result if result[0] != 0 else result[1:]
 
 
 def main():

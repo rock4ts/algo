@@ -40,23 +40,17 @@ C# (MS .NET 5.0 + ASP)	0.4 секунды	64Mb
 100     2 2 5 5
 '''
 
-from math import sqrt
-
-
 def factors(n):
     factors = []
     j = 2
-
-    while n > 1:
-        for i in range(j, int(sqrt(n)) + 1):
-            if n % i == 0:
-                n //= i
-                factors.append(i)
-                break
+    while j * j <= n:
+        if n % j == 0:
+            factors.append(j)
+            n //= j
         else:
-            factors.append(n)
-            break
-    
+            j += 1
+    if n != 1:
+        factors.append(n)
     return factors
 
 

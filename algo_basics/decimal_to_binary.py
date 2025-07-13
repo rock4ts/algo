@@ -1,21 +1,40 @@
-def decimal_to_binary(decimal_n):
-    binary_n = []
-    
-    if decimal_n == 0:
+'''
+https://contest.yandex.ru/contest/23389/problems/G/
+
+Работа из дома
+
+Ограничение времени	1 секунда
+Ограничение памяти	64Mb
+Ввод	стандартный ввод или input.txt
+Вывод	стандартный вывод или output.txt
+
+Вася реализовал функцию, которая переводит целое число из десятичной системы в двоичную.
+Но, кажется, она получилась не очень оптимальной.
+
+Попробуйте написать более эффективную программу.
+
+Не используйте встроенные средства языка по переводу чисел в бинарное представление.
+
+Формат ввода
+На вход подаётся целое число в диапазоне от 0 до 10000.
+
+Формат вывода
+Выведите двоичное представление этого числа.
+'''
+
+def decimal_to_binary(n):
+    if n == 0:
         return '0'
-
-    while decimal_n != 1:
-        remainder = decimal_n % 2
-        binary_n.insert(0, str(remainder))
-        decimal_n = decimal_n // 2
-    binary_n.insert(0, str(decimal_n))
-
-    return ''.join(binary_n)
+    binary_n = ''
+    while n > 0:
+        binary_n = str(n % 2) + binary_n
+        n //= 2
+    return binary_n
 
 
 def main():
-    decimal_n = int(input())
-    print(decimal_to_binary(decimal_n))
+    n = int(input())
+    print(decimal_to_binary(n))
 
 
 if __name__ == '__main__':
